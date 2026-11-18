@@ -1,0 +1,10 @@
+
+
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="90" fill="#142b49"/>
+<path d="M100 165L256 75L412 165V390H100Z" fill="#1764a0"/>
+<path d="M100 165L256 255L412 165M256 255V390" fill="none" stroke="white" stroke-width="20"/>
+<text x="256" y="465" font-size="42" text-anchor="middle" fill="white">MS</text>
+</svg>
+```
