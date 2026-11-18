@@ -1,1 +1,765 @@
 
+```html
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142b49">
+<title>MAGAZZINO SMART</title>
+<link rel="manifest" href="manifest.json">
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f1f4f8;
+ color:#203047;
+}
+header{
+ background:#142b49;
+ color:white;
+ padding:22px;
+}
+header h1{margin:0;font-size:24px}
+header p{color:#bdcddd;margin-bottom:0}
+main{padding:15px;max-width:850px;margin:auto}
+.card{
+ background:white;
+ border-radius:13px;
+ padding:17px;
+ margin-bottom:15px;
+ box-shadow:0 2px 8px #0000000b;
+}
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:8px;
+}
+.stat{
+ background:#eaf0f7;
+ padding:14px 5px;
+ border-radius:10px;
+ text-align:center;
+}
+.stat strong{
+ display:block;
+ color:#1764a0;
+ font-size:23px;
+}
+.stat span{font-size:11px}
+nav{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:5px;
+ margin-bottom:15px;
+}
+button{
+ border:0;
+ padding:12px;
+ border-radius:8px;
+ font-weight:bold;
+ cursor:pointer;
+}
+nav button{background:#dce6f1;color:#234}
+nav button.active{background:#1764a0;color:white}
+.primary{background:#1764a0;color:white}
+.secondary{background:#e6edf5;color:#234}
+.danger{background:#ffe5e5;color:#a22}
+input{
+ width:100%;
+ padding:13px;
+ border:1px solid #ccd5df;
+ border-radius:8px;
+ margin:6px 0 13px;
+ font-size:16px;
+}
+label{font-size:13px;font-weight:bold}
+.voice{
+ background:#1764a0;
+ color:white;
+ width:100%;
+ padding:18px;
+ font-size:17px;
+ margin-bottom:10px;
+}
+.hidden{display:none}
+.item{
+ border-bottom:1px solid #e5e9ef;
+ padding:13px 0;
+}
+.item:last-child{border:0}
+.item small{
+ display:block;
+ color:#718096;
+ margin:6px 0;
+}
+.quantity{
+ color:#1764a0;
+ font-weight:bold;
+ font-size:20px;
+}
+.actions{
+ display:flex;
+ gap:6px;
+ margin-top:8px;
+ flex-wrap:wrap;
+}
+.actions button{padding:9px}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+.full{grid-column:1/-1}
+footer{
+ text-align:center;
+ color:#8794a5;
+ padding:20px;
+ font-size:12px;
+}
+@media(max-width:390px){
+ .stats{grid-template-columns:1fr 1fr}
+ .grid{grid-template-columns:1fr}
+ .full{grid-column:auto}
+}
+@media print{
+ header,nav,.no-print,footer{display:none!important}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📦 MAGAZZINO SMART</h1>
+<p>Gestione intelligente del magazzino</p>
+</header>
+
+<main>
+
+<div class="card">
+<div class="stats">
+ <div class="stat">
+  <strong id="total">0</strong>
+  <span>Capi totali</span>
+ </div>
+ <div class="stat">
+  <strong id="variants">0</strong>
+  <span>Varianti</span>
+ </div>
+ <div class="stat">
+  <strong id="codes">0</strong>
+  <span>Articoli</span>
+ </div>
+</div>
+</div>
+
+<nav class="no-print">
+<button class="active" onclick="show('home',this)">Home</button>
+<button onclick="show('form',this)">Inserisci</button>
+<button onclick="show('archive',this)">Archivio</button>
+[18/11, 12:00] Chatgpt: <button onclick="show('tools',this)">Strumenti</button>
+</nav>
+
+<section id="home">
+
+<div class="card">
+<h2>Benvenuto!</h2>
+<p>Il tuo magazzino sempre sotto controllo.</p>
+<button class="primary" style="width:100%"
+onclick="show('form')">
++ NUOVO ARTICOLO
+</button>
+</div>
+
+<div class="card">
+<h3>Ultime operazioni</h3>
+<div id="recent"></div>
+</div>
+
+</section>
+
+<section id="form" class="hidden">
+
+<div class="card">
+<h2>🎙️ Inserimento vocale</h2>
+
+<button class="voice" onclick="voiceInput()">
+🎤 PARLA PER INSERIRE
+</button>
+
+<p id="voiceStatus" style="font-size:12px">
+Premi il microfono e descrivi il prodotto.
+</p>
+
+<p style="font-size:12px;color:#718096">
+Esempio: Articolo 12548, giacca uomo,
+marca Armani, colore blu, taglia 50,
+quantità 12.
+</p>
+</div>
+
+<div class="card">
+
+<h2>📋 Scheda articolo</h2>
+
+<form id="productForm">
+
+<label>Codice articolo *</label>
+<input id="code" required placeholder="12548">
+
+<label>Descrizione *</label>
+<input id="description" required placeholder="Giacca uomo">
+
+<div class="grid">
+
+<div>
+<label>Marca</label>
+<input id="brand" placeholder="Marca">
+</div>
+
+<div>
+<label>Modello</label>
+<input id="model" placeholder="Modello">
+</div>
+
+<div>
+<label>Colore *</label>
+<input id="color" required placeholder="Blu">
+</div>
+
+<div>
+<label>Taglia *</label>
+<input id="size" required placeholder="50">
+</div>
+
+<div class="full">
+<label>Quantità *</label>
+<input id="quantity" type="number"
+min="0" required placeholder="12">
+</div>
+
+<div class="full">
+<label>Posizione magazzino</label>
+<input id="location" placeholder="Scaffale A1">
+</div>
+
+</div>
+
+<button class="primary" style="width:100%">
+SALVA ARTICOLO
+</button>
+
+<button type="button" class="secondary"
+style="width:100%;margin-top:8px"
+onclick="resetForm()">
+ANNULLA
+</button>
+
+</form>
+</div>
+</section>
+
+<section id="archive" class="hidden">
+
+<div class="card">
+<h2>📦 Archivio articoli</h2>
+
+<input id="search"
+placeholder="Cerca codice, marca, colore..."
+oninput="render()">
+
+<div id="items"></div>
+</div>
+
+</section>
+
+<section id="tools" class="hidden">
+
+<div class="card">
+<h2>📊 Esportazione</h2>
+
+<button class="primary" style="width:100%"
+onclick="exportCSV()">
+ESPORTA EXCEL
+</button>
+
+<button class="secondary" style="width:100%;margin-top:8px"
+onclick="window.print()">
+STAMPA / PDF
+</button>
+</div>
+
+<div class="card">
+<h2>💾 Backup e sicurezza</h2>
+
+<button class="primary" style="width:100%"
+onclick="backup()">
+SALVA BACKUP
+</button>
+
+<label>Ripristina backup</label>
+<input type="file" accept=".json"
+onchange="restore(event)">
+</div>
+
+<div class="card">
+<h2>📜 Storico operazioni</h2>
+<div id="history"></div>
+</div>
+
+</section>
+
+<footer>
+MAGAZZINO SMART · Versione 1.0
+</footer>
+
+</main>
+
+<script>
+
+const DB_NAME="MagazzinoSmart";
+let db;
+let products=[];
+let history=[];
+let editing=null;
+
+function openDB(){
+ return new Promise((resolve,reject)=>{
+  const request=indexedDB.open(DB_NAME,1);
+
+  request.onupgradeneeded=()=>{
+   const database=request.result;
+   database.createObjectStore("products",{keyPath:"id"});
+   database.createObjectStore("history",{keyPath:"id"});
+  };
+
+  request.onsuccess=()=>{
+   db=request.result;
+   resolve();
+  };
+
+  request.onerror=()=>reject(request.error);
+ });
+}
+
+function getAll(store){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(store,"readonly");
+  const req=tx.objectStore(store).getAll();
+  req.onsuccess=()=>resolve(req.result);
+  req.onerror=()=>reject(req.error);
+ });
+}
+
+function put(store,item){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(store,"readwrite");
+  tx.objectStore(store).put(item);
+  tx.oncomplete=resolve;
+  tx.onerror=()=>reject(tx.error);
+ });
+}
+
+function remove(store,id){
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(store,"readwrite");
+[18/11, 12:00] Chatgpt: tx.objectStore(store).delete(id);
+  tx.oncomplete=resolve;
+  tx.onerror=()=>reject(tx.error);
+ });
+}
+
+function uid(){
+ return crypto.randomUUID?
+ crypto.randomUUID():Date.now().toString()+Math.random();
+}
+
+function log(action,p,delta){
+ return put("history",{
+  id:uid(),
+  date:new Date().toISOString(),
+  action,
+  code:p.code,
+  description:p.description,
+  delta,
+  quantity:p.quantity
+ });
+}
+
+async function refresh(){
+ products=await getAll("products");
+ history=await getAll("history");
+ render();
+}
+
+function show(id,button){
+ document.querySelectorAll("main section")
+ .forEach(s=>s.classList.add("hidden"));
+
+ document.getElementById(id).classList.remove("hidden");
+
+ document.querySelectorAll("nav button")
+ .forEach(b=>b.classList.remove("active"));
+
+ if(button)button.classList.add("active");
+ render();
+}
+
+function esc(v){
+ return String(v??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function variantKey(p){
+ return [
+  p.code,p.color,p.size,p.model
+ ].map(v=>String(v||"").trim().toLowerCase()).join("|");
+}
+
+function render(){
+
+ document.getElementById("total").textContent=
+ products.reduce((s,p)=>s+Number(p.quantity),0);
+
+ document.getElementById("variants").textContent=products.length;
+
+ document.getElementById("codes").textContent=
+ new Set(products.map(p=>p.code)).size;
+
+ const recent=[...history]
+ .sort((a,b)=>b.date.localeCompare(a.date))
+ .slice(0,5);
+
+ document.getElementById("recent").innerHTML=
+ recent.length?recent.map(h=>`
+ <div class="item">
+ <strong>${esc(h.action)}</strong>
+ <small>${esc(h.code)} · ${esc(h.description)}</small>
+ ${new Date(h.date).toLocaleString("it-IT")}
+ </div>`).join(""):"Nessuna operazione.";
+
+ const q=(document.getElementById("search")?.value||"")
+ .toLowerCase();
+
+ const filtered=products.filter(p=>
+ Object.values(p).join(" ").toLowerCase().includes(q)
+ );
+
+ document.getElementById("items").innerHTML=
+ filtered.length?filtered.map(p=>`
+ <div class="item">
+ <strong>${esc(p.description)}</strong>
+ <small>
+ Codice: ${esc(p.code)} |
+ ${esc(p.brand)} |
+ ${esc(p.color)} |
+ Taglia ${esc(p.size)}
+ <br>Posizione: ${esc(p.location||"-")}
+ </small>
+ <div class="quantity">${p.quantity} pezzi</div>
+
+ <div class="actions no-print">
+ <button class="secondary"
+ onclick="adjust('${p.id}',1)">+1</button>
+
+ <button class="secondary"
+ onclick="adjust('${p.id}',-1)">-1</button>
+
+ <button class="secondary"
+ onclick="editItem('${p.id}')">Modifica</button>
+
+ <button class="danger"
+ onclick="deleteItem('${p.id}')">Elimina</button>
+ </div>
+ </div>`).join(""):"Nessun articolo trovato.";
+
+ document.getElementById("history").innerHTML=
+ [...history].sort((a,b)=>b.date.localeCompare(a.date))
+ .slice(0,100).map(h=>`
+ <div class="item">
+ <strong>${esc(h.action)} · ${esc(h.code)}</strong>
+ <small>${esc(h.description)}</small>
+ ${new Date(h.date).toLocaleString("it-IT")}
+ </div>`).join("");
+}
+
+document.getElementById("productForm")
+.addEventListener("submit",async e=>{
+
+ e.preventDefault();
+
+ const p={
+  code:val("code"),
+  description:val("description"),
+  brand:val("brand"),
+  model:val("model"),
+  color:val("color"),
+  size:val("size"),
+  location:val("location"),
+  quantity:Number(val("quantity"))
+ };
+
+ if(!p.code||!p.description||!p.color||!p.size||
+ !Number.isInteger(p.quantity)||p.quantity<0){
+  alert("Controlla i dati inseriti.");
+  return;
+ }
+
+ if(editing){
+
+  const old=products.find(x=>x.id===editing);
+
+  const duplicate=products.find(x=>
+   x.id!==editing&&variantKey(x)===variantKey(p)
+  );
+
+  if(duplicate){
+   alert("Esiste già questa variante. Modifica l'articolo esistente.");
+   return;
+  }
+
+  Object.assign(old,p);
+  await put("products",old);
+
+  await log("Modifica",old,old.quantity-p.quantity);
+  editing=null;
+
+ }else{
+[18/11, 12:00] Chatgpt: const existing=products.find(x=>variantKey(x)===variantKey(p));
+
+  if(existing){
+   existing.quantity+=p.quantity;
+   await put("products",existing);
+   await log("Aggiunta quantità",existing,p.quantity);
+  }else{
+   p.id=uid();
+   p.createdAt=new Date().toISOString();
+   await put("products",p);
+   await log("Nuovo articolo",p,p.quantity);
+  }
+ }
+
+ resetForm();
+ await refresh();
+ show("archive",document.querySelectorAll("nav button")[2]);
+
+});
+
+function val(id){
+ return document.getElementById(id).value.trim();
+}
+
+function resetForm(){
+ document.getElementById("productForm").reset();
+ editing=null;
+}
+
+async function adjust(id,n){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ if(p.quantity+n<0)return alert("Quantità non valida.");
+
+ p.quantity+=n;
+ await put("products",p);
+ await log("Rettifica quantità",p,n);
+ await refresh();
+}
+
+function editItem(id){
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ editing=id;
+
+ ["code","description","brand","model",
+ "color","size","location","quantity"]
+ .forEach(k=>document.getElementById(k).value=p[k]??"");
+
+ show("form",document.querySelectorAll("nav button")[1]);
+}
+
+async function deleteItem(id){
+ if(!confirm("Vuoi eliminare questo articolo?"))return;
+
+ const p=products.find(x=>x.id===id);
+ if(!p)return;
+
+ await log("Eliminazione",p,-p.quantity);
+ await remove("products",id);
+ await refresh();
+}
+
+function exportCSV(){
+ const rows=[
+ ["Codice","Descrizione","Marca","Modello",
+ "Colore","Taglia","Posizione","Quantità"],
+ ...products.map(p=>[
+ p.code,p.description,p.brand,p.model,
+ p.color,p.size,p.location,p.quantity
+ ])
+ ];
+
+ const csv="\uFEFF"+rows.map(r=>
+ r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"')
+ .join(";")
+ ).join("\r\n");
+
+ download(csv,"inventario_magazzino.csv","text/csv;charset=utf-8");
+}
+
+function download(data,name,type){
+ const url=URL.createObjectURL(new Blob([data],{type}));
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=name;
+ a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+async function backup(){
+ const data={
+  version:1,
+  products,
+  history,
+  date:new Date().toISOString()
+ };
+
+ download(JSON.stringify(data,null,2),
+ "backup_magazzino.json","application/json");
+}
+
+async function restore(event){
+ const file=event.target.files[0];
+ if(!file)return;
+
+ if(!confirm("Il ripristino sostituirà i dati presenti. Continuare?"))
+ return;
+
+ try{
+  const data=JSON.parse(await file.text());
+
+  if(!Array.isArray(data.products)||
+     !Array.isArray(data.history)){
+   throw new Error("Backup non valido");
+  }
+
+  const tx=db.transaction(["products","history"],"readwrite");
+
+  tx.objectStore("products").clear();
+  tx.objectStore("history").clear();
+
+  data.products.forEach(p=>tx.objectStore("products").put(p));
+  data.history.forEach(h=>tx.objectStore("history").put(h));
+
+  tx.oncomplete=async()=>{
+   await refresh();
+   alert("Backup ripristinato correttamente.");
+  };
+
+  tx.onerror=()=>alert("Errore nel ripristino.");
+
+ }catch(e){
+  alert("File di backup non valido.");
+ }
+
+ event.target.value="";
+}
+
+function voiceInput(){
+
+ const Speech=window.SpeechRecognition||
+ window.webkitSpeechRecognition;
+
+ if(!Speech){
+  alert("Riconoscimento vocale non disponibile. Usa Chrome.");
+  return;
+ }
+
+ const rec=new Speech();
+ rec.lang="it-IT";
+ rec.interimResults=false;
+
+ document.getElementById("voiceStatus").textContent=
+ "Ti sto ascoltando...";
+
+ rec.onresult=e=>{
+  const text=e.results[0][0].transcript;
+  parseVoice(text);
+  document.getElementById("voiceStatus").textContent=
+  "Riconosciuto: "+text;
+ };
+
+ rec.onerror=e=>{
+  document.getElementById("voiceStatus").textContent=
+  "Errore vocale: "+e.error;
+ };
+
+ rec.start();
+}
+
+function parseVoice(text){
+
+ const code=text.match(
+ /(?:articolo|codice)\s*(?:numero)?\s*([a-z0-9/-]+)/i
+ );
+[18/11, 12:00] Chatgpt: if(code)document.getElementById("code").value=code[1];
+
+ const size=text.match(/taglia\s*([a-z0-9]+)/i);
+ if(size)document.getElementById("size").value=size[1];
+
+ const qty=text.match(
+ /(?:quantità|qta)\s*(?:di)?\s*(\d+)/i
+ )||text.match(/(\d+)\s*(?:pezzi|capi|unità)/i);
+
+ if(qty)document.getElementById("quantity").value=qty[1];
+
+ function field(name,next){
+  const pattern=new RegExp(
+   name+"\\s+(.+?)(?=\\s*(?:,|;)?\\s*(?:"+next+")\\b|$)","i"
+  );
+  const m=text.match(pattern);
+  return m?m[1].replace(/[,;]+$/,"").trim():"";
+ }
+
+ const brand=field("marca","modello|colore|taglia|quantità|qta|posizione");
+ const model=field("modello","marca|colore|taglia|quantità|qta|posizione");
+ const color=field("colore","marca|modello|taglia|quantità|qta|posizione");
+ const location=field("posizione","marca|modello|colore|taglia|quantità|qta");
+
+ if(brand)document.getElementById("brand").value=brand;
+ if(model)document.getElementById("model").value=model;
+ if(color)document.getElementById("color").value=color;
+ if(location)document.getElementById("location").value=location;
+
+ let desc=text
+ .replace(/(?:articolo|codice)\s*(?:numero)?\s*[a-z0-9/-]+/i,"")
+ .split(/\b(?:marca|modello|colore|taglia|quantità|qta|posizione)\b/i)[0]
+ .replace(/^[\s,;:-]+|[\s,;:-]+$/g,"");
+
+ if(desc)document.getElementById("description").value=desc;
+}
+
+async function start(){
+
+ await openDB();
+ await refresh();
+
+ if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("./sw.js")
+  .catch(console.error);
+ }
+}
+
+start().catch(e=>{
+ alert("Errore apertura archivio: "+e.message);
+});
+
+</script>
+</body>
+</html>
