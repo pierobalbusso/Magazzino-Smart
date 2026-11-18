@@ -1,0 +1,20 @@
+
+
+```json
+{
+  "name": "MAGAZZINO SMART",
+  "short_name": "Magazzino",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f1f4f8",
+  "theme_color": "#142b49",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+``
