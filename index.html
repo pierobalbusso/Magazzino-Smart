@@ -365,7 +365,7 @@ function put(store,item){
 function remove(store,id){
  return new Promise((resolve,reject)=>{
   const tx=db.transaction(store,"readwrite");
-[18/11, 12:00] Chatgpt: tx.objectStore(store).delete(id);
+  tx.objectStore(store).delete(id);
   tx.oncomplete=resolve;
   tx.onerror=()=>reject(tx.error);
  });
@@ -529,7 +529,7 @@ document.getElementById("productForm")
   editing=null;
 
  }else{
-[18/11, 12:00] Chatgpt: const existing=products.find(x=>variantKey(x)===variantKey(p));
+ const existing=products.find(x=>variantKey(x)===variantKey(p));
 
   if(existing){
    existing.quantity+=p.quantity;
@@ -707,7 +707,7 @@ function parseVoice(text){
  const code=text.match(
  /(?:articolo|codice)\s*(?:numero)?\s*([a-z0-9/-]+)/i
  );
-[18/11, 12:00] Chatgpt: if(code)document.getElementById("code").value=code[1];
+ if(code)document.getElementById("code").value=code[1];
 
  const size=text.match(/taglia\s*([a-z0-9]+)/i);
  if(size)document.getElementById("size").value=size[1];
