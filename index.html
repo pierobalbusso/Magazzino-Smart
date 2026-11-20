@@ -499,7 +499,7 @@ document.getElementById("productForm")
   model:val("model"),
   color:val("color"),
   size:val("size"),
-  location:val("location"),
+  cost:val("cost")==="" ? null : Number(val("cost")),
   quantity:Number(val("quantity"))
  };
 
