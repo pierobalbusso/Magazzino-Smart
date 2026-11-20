@@ -742,48 +742,82 @@ function voiceInput(){
 
  rec.start();
 }
-
 function parseVoice(text){
 
- const code=text.match(
- /(?:articolo|codice)\s*(?:numero)?\s*([a-z0-9/-]+)/i
- );
- if(code)document.getElementById("code").value=code[1];
+ const regex = /(^|[\s,;:])(codice\s+articolo|codice|descrizione|marca|quantità|qta|prezzo\s+di\s+costo\s+unitario|costo\s+unitario|prezzo\s+unitario|costo|prezzo)(?=$|[\s,;:.])/giu;
 
- const size=text.match(/taglia\s*([a-z0-9]+)/i);
- if(size)document.getElementById("size").value=size[1];
+ const matches = [...text.matchAll(regex)];
 
- const qty=text.match(
- /(?:quantità|qta)\s*(?:di)?\s*(\d+)/i
- )||text.match(/(\d+)\s*(?:pezzi|capi|unità)/i);
+ const fields = {};
 
- if(qty)document.getElementById("quantity").value=qty[1];
+ matches.forEach((m,i)=>{
 
- function field(name,next){
-  const pattern=new RegExp(
-   name+"\\s+(.+?)(?=\\s*(?:,|;)?\\s*(?:"+next+")\\b|$)","i"
-  );
-  const m=text.match(pattern);
-  return m?m[1].replace(/[,;]+$/,"").trim():"";
+  const label = m[2].toLowerCase().replace(/\s+/g," ");
+
+  const start = m.index + m[1].length + m[2].length;
+
+  const next = matches[i+1];
+
+  const end = next
+   ? next.index + next[1].length
+   : text.length;
+
+  const value = text.substring(start,end)
+   .replace(/^[\s,;:]+|[\s,;:.]+$/g,"")
+   .trim();
+
+  if(label==="codice articolo" || label==="codice")
+   fields.code=value;
+
+  if(label==="descrizione")
+   fields.description=value;
+
+  if(label==="marca")
+   fields.brand=value;
+
+  if(label==="quantità" || label==="qta")
+   fields.quantity=value;
+
+  if(
+   label==="costo unitario" ||
+   label==="prezzo unitario" ||
+   label==="prezzo di costo unitario" ||
+   label==="costo" ||
+   label==="prezzo"
+  ){
+   fields.cost=value;
+  }
+
+ });
+
+ if(fields.code)
+  document.getElementById("code").value=fields.code;
+
+ if(fields.description)
+  document.getElementById("description").value=fields.description;
+
+ if(fields.brand)
+  document.getElementById("brand").value=fields.brand;
+
+ if(fields.quantity){
+  const q=fields.quantity.match(/\d+/);
+  if(q) document.getElementById("quantity").value=q[0];
  }
 
- const brand=field("marca","modello|colore|taglia|quantità|qta|posizione");
- const model=field("modello","marca|colore|taglia|quantità|qta|posizione");
- const color=field("colore","marca|modello|taglia|quantità|qta|posizione");
- const location=field("posizione","marca|modello|colore|taglia|quantità|qta");
+ if(fields.cost){
 
- if(brand)document.getElementById("brand").value=brand;
- if(model)document.getElementById("model").value=model;
- if(color)document.getElementById("color").value=color;
- if(location)document.getElementById("location").value=location;
+  const cost=fields.cost
+   .replace(/euro|eur|€/gi,"")
+   .replace(/\s/g,"")
+   .replace(/\.(?=\d{3}(?:,|$))/g,"")
+   .replace(",",".")
+   .match(/\d+(?:\.\d+)?/);
 
- let desc=text
- .replace(/(?:articolo|codice)\s*(?:numero)?\s*[a-z0-9/-]+/i,"")
- .split(/\b(?:marca|modello|colore|taglia|quantità|qta|posizione)\b/i)[0]
- .replace(/^[\s,;:-]+|[\s,;:-]+$/g,"");
+  if(cost)
+   document.getElementById("cost").value=cost[0];
+ }
 
- if(desc)document.getElementById("description").value=desc;
-}
+
 
 async function start(){
 
