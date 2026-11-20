@@ -1,4 +1,4 @@
-
+8
 ```html
 <!DOCTYPE html>
 <html lang="it">
@@ -33,7 +33,7 @@ main{padding:15px;max-width:850px;margin:auto}
  box-shadow:0 2px 8px #0000000b;
 }
 
-```css
+css
 .stats{
  display:grid;
  grid-template-columns:repeat(4,minmax(0,1fr));
@@ -220,27 +220,18 @@ quantità 12.
 <label>Descrizione *</label>
 <input id="description" required placeholder="Giacca uomo">
 
+
+</div>
 <div class="grid">
 
-<div>
+<div class="full">
 <label>Marca</label>
 <input id="brand" placeholder="Marca">
 </div>
 
-<div>
-<label>Modello</label>
-<input id="model" placeholder="Modello">
-</div>
-
-<div>
-<label>Colore *</label>
-<input id="color" required placeholder="Blu">
-</div>
-
-<div>
-<label>Taglia *</label>
-<input id="size" required placeholder="50">
-</div>
+<input type="hidden" id="model">
+<input type="hidden" id="color">
+<input type="hidden" id="size">
 
 <div class="full">
 <label>Quantità *</label>
@@ -248,13 +239,19 @@ quantità 12.
 min="0" required placeholder="12">
 </div>
 
+<div class="full">
+<label>Posizione magazzino</label>
+<input id="location" placeholder="Scaffale A1">
+</div>
+
+<div class="full">
 <label>Prezzo di costo unitario (€)</label>
 <input id="cost" type="number"
 min="0" step="0.01"
 placeholder="Es. 35.00">
- 
 </div>
 
+</div>
 <button class="primary" style="width:100%">
 SALVA ARTICOLO
 </button>
