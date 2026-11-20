@@ -1,7 +1,7 @@
 
 
 ```javascript
-const CACHE = "magazzino-smart-v4";
+const CACHE = "magazzino-smart-v5";
 
 const FILES = [
   "./",
