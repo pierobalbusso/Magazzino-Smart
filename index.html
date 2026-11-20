@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,143 +11,166 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:Arial,sans-serif;
  background:#f1f4f8;
  color:#203047;
 }
+
 header{
  background:#142b49;
  color:white;
  padding:22px;
 }
+
 header h1{margin:0;font-size:24px}
 header p{color:#bdcddd;margin-bottom:0}
-main{padding:15px;max-width:850px;margin:auto}
+
+main{
+ padding:15px;
+ max-width:850px;
+ margin:auto;
+}
+
 .card{
  background:white;
- border-radius:13px;
- padding:17px;
- margin-bottom:15px;
+ border-radius:16px;
+ padding:19px;
+ margin-bottom:16px;
  box-shadow:0 2px 8px #0000000b;
 }
 
-css
 .stats{
  display:grid;
  grid-template-columns:repeat(4,minmax(0,1fr));
- gap:8px;
+ gap:9px;
 }
+
 .stat{
  background:#eaf0f7;
- padding:14px 5px;
- border-radius:10px;
+ padding:16px 5px;
+ border-radius:12px;
  text-align:center;
 }
+
 .stat strong{
  display:block;
  color:#1764a0;
  font-size:23px;
 }
-.stat span{font-size:11px}
+
+.stat span{font-size:12px}
+
 nav{
  display:grid;
  grid-template-columns:repeat(4,1fr);
- gap:5px;
- margin-bottom:15px;
+ gap:7px;
+ margin-bottom:16px;
 }
+
 button{
  border:0;
- padding:12px;
- border-radius:8px;
+ padding:13px;
+ border-radius:9px;
  font-weight:bold;
  cursor:pointer;
 }
-nav button{background:#dce6f1;color:#234}
-nav button.active{background:#1764a0;color:white}
+
+nav button{
+ background:#dce6f1;
+ color:#234;
+}
+
+nav button.active{
+ background:#1764a0;
+ color:white;
+}
+
 .primary{background:#1764a0;color:white}
 .secondary{background:#e6edf5;color:#234}
 .danger{background:#ffe5e5;color:#a22}
+
 input{
  width:100%;
- padding:13px;
+ padding:14px;
  border:1px solid #ccd5df;
- border-radius:8px;
- margin:6px 0 13px;
+ border-radius:9px;
+ margin:8px 0 18px;
  font-size:16px;
-}
-label{font-size:13px;font-weight:bold}
-.voice{
- background:#1764a0;
- color:white;
- width:100%;
- padding:18px;
- font-size:17px;
- margin-bottom:10px;
-}
-.hidden{display:none}
-.item{
- border-bottom:1px solid #e5e9ef;
- padding:13px 0;
-}
-.item:last-child{border:0}
-.item small{
- display:block;
- color:#718096;
- margin:6px 0;
-}
-.quantity{
- color:#1764a0;
- font-weight:bold;
- font-size:20px;
-}
-.actions{
- display:flex;
- gap:6px;
- margin-top:8px;
- flex-wrap:wrap;
-}
-.actions button{padding:9px}
-`css
-.grid{
- display:grid;
- grid-template-columns:1fr;
- gap:0;
-}
-
-.full{
- grid-column:1/-1;
 }
 
 label{
  display:block;
  font-size:15px;
  font-weight:bold;
- margin-top:5px;
 }
+
+.voice{
+ background:#1764a0;
+ color:white;
+ width:100%;
+ padding:19px;
+ font-size:17px;
+ margin-bottom:10px;
+}
+
+.hidden{display:none}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr;
+}
+
+.full{grid-column:1/-1}
 
 .article-card h2{
  margin-top:0;
  margin-bottom:22px;
 }
 
-.article-card input{
- margin:8px 0 18px;
+.item{
+ border-bottom:1px solid #e5e9ef;
+ padding:14px 0;
 }
+
+.item:last-child{border:0}
+
+.item small{
+ display:block;
+ color:#718096;
+ margin:6px 0;
+ line-height:1.6;
 }
-.full{grid-column:1/-1}
+
+.quantity{
+ color:#1764a0;
+ font-weight:bold;
+ font-size:20px;
+}
+
+.actions{
+ display:flex;
+ gap:6px;
+ margin-top:10px;
+ flex-wrap:wrap;
+}
+
+.actions button{padding:10px}
+
 footer{
  text-align:center;
  color:#8794a5;
  padding:20px;
  font-size:12px;
 }
+
 @media(max-width:600px){
  .stats{grid-template-columns:1fr 1fr}
- .grid{grid-template-columns:1fr}
- .full{grid-column:auto}
+ nav button{font-size:12px;padding:12px 4px}
 }
+
 @media print{
  header,nav,.no-print,footer{display:none!important}
 }
@@ -162,8 +186,6 @@ footer{
 
 <main>
 
-<main>
-
 <div class="card stats">
 
 <div class="stat">
@@ -173,7 +195,7 @@ footer{
 
 <div class="stat">
 <strong id="variants">0</strong>
-<span>Varianti</span>
+<span>Articoli registrati</span>
 </div>
 
 <div class="stat">
@@ -183,15 +205,16 @@ footer{
 
 <div class="stat">
 <strong id="codes">0</strong>
-<span>Articoli</span>
+<span>Codici articolo</span>
 </div>
 
 </div>
 
 <nav class="no-print">
-<button class="active" onclick="show('home',this)">Home</button>
+ <button class="active" onclick="show('home',this)">Home</button>
 <button onclick="show('form',this)">Inserisci</button>
-<button onclick="show('archive',this)">Archivio</button> <button onclick="show('tools',this)">Strumenti</button>
+<button onclick="show('archive',this)">Archivio</button>
+<button onclick="show('tools',this)">Strumenti</button>
 </nav>
 
 <section id="home">
@@ -199,7 +222,9 @@ footer{
 <div class="card">
 <h2>Benvenuto!</h2>
 <p>Il tuo magazzino sempre sotto controllo.</p>
-<button class="primary" style="width:100%"
+
+<button class="primary"
+style="width:100%"
 onclick="show('form')">
 + NUOVO ARTICOLO
 </button>
@@ -215,22 +240,27 @@ onclick="show('form')">
 <section id="form" class="hidden">
 
 <div class="card">
+
 <h2>🎙️ Inserimento vocale</h2>
 
 <button class="voice" onclick="voiceInput()">
 🎤 PARLA PER INSERIRE
 </button>
 
-<p id="voiceStatus" style="font-size:12px">
+<p id="voiceStatus" style="font-size:13px">
 Premi il microfono e descrivi il prodotto.
 </p>
 
-<p style="font-size:12px;color:#718096">
-Esempio: Articolo 12548, giacca uomo,
-marca Armani, colore blu, taglia 50,
-quantità 12.
+<p style="font-size:12px;color:#718096;line-height:1.6">
+Esempio: Codice articolo 12548,
+descrizione giacca uomo elegante,
+marca Armani,
+quantità 12,
+prezzo di costo unitario 35 euro e 50.
 </p>
+
 </div>
+
 <div class="card article-card">
 
 <h2>📋 Scheda articolo</h2>
@@ -254,21 +284,17 @@ quantità 12.
 <input id="brand" placeholder="Marca">
 </div>
 
-<input type="hidden" id="model">
-<input type="hidden" id="color">
-<input type="hidden" id="size">
-
 <div class="full">
 <label>Quantità *</label>
 <input id="quantity" type="number"
-min="0" required placeholder="12">
+min="0" step="1" required placeholder="12">
 </div>
 
 <div class="full">
 <label>Prezzo di costo unitario (€)</label>
 <input id="cost" type="number"
 min="0" step="0.01"
-placeholder="Es. 35.00">
+placeholder="Es. 35.50">
 </div>
 
 </div>
@@ -287,20 +313,20 @@ ANNULLA
 </form>
 </div>
 
-</div>
-</div>
 </section>
 
 <section id="archive" class="hidden">
 
 <div class="card">
+
 <h2>📦 Archivio articoli</h2>
 
 <input id="search"
-placeholder="Cerca codice, marca, colore..."
+placeholder="Cerca codice, descrizione, marca..."
 oninput="render()">
 
 <div id="items"></div>
+
 </div>
 
 </section>
@@ -308,41 +334,53 @@ oninput="render()">
 <section id="tools" class="hidden">
 
 <div class="card">
+
 <h2>📊 Esportazione</h2>
 
-<button class="primary" style="width:100%"
+<button class="primary"
+style="width:100%"
 onclick="exportCSV()">
 ESPORTA EXCEL
 </button>
 
-<button class="secondary" style="width:100%;margin-top:8px"
+<button class="secondary"
+style="width:100%;margin-top:8px"
 onclick="window.print()">
 STAMPA / PDF
 </button>
+
 </div>
 
 <div class="card">
+
 <h2>💾 Backup e sicurezza</h2>
 
-<button class="primary" style="width:100%"
+<button class="primary"
+style="width:100%"
 onclick="backup()">
 SALVA BACKUP
 </button>
 
 <label>Ripristina backup</label>
-<input type="file" accept=".json"
+
+<input type="file"
+accept=".json"
 onchange="restore(event)">
+
 </div>
 
 <div class="card">
+
 <h2>📜 Storico operazioni</h2>
+
 <div id="history"></div>
+
 </div>
 
 </section>
 
 <footer>
-MAGAZZINO SMART · Versione 1.0
+MAGAZZINO SMART · Versione 1.1
 </footer>
 
 </main>
@@ -350,19 +388,34 @@ MAGAZZINO SMART · Versione 1.0
 <script>
 
 const DB_NAME="MagazzinoSmart";
+
 let db;
 let products=[];
 let history=[];
 let editing=null;
+let recognition=null;
+
+
+// DATABASE
 
 function openDB(){
+
  return new Promise((resolve,reject)=>{
+
   const request=indexedDB.open(DB_NAME,1);
 
   request.onupgradeneeded=()=>{
+
    const database=request.result;
-   database.createObjectStore("products",{keyPath:"id"});
-   database.createObjectStore("history",{keyPath:"id"});
+
+   if(!database.objectStoreNames.contains("products")){
+    database.createObjectStore("products",{keyPath:"id"});
+   }
+
+   if(!database.objectStoreNames.contains("history")){
+    database.createObjectStore("history",{keyPath:"id"});
+   }
+
   };
 
   request.onsuccess=()=>{
@@ -371,60 +424,108 @@ function openDB(){
   };
 
   request.onerror=()=>reject(request.error);
+
  });
+
 }
+
 
 function getAll(store){
+
  return new Promise((resolve,reject)=>{
+
   const tx=db.transaction(store,"readonly");
+
   const req=tx.objectStore(store).getAll();
+
   req.onsuccess=()=>resolve(req.result);
+
   req.onerror=()=>reject(req.error);
+
  });
+
+}
+ function put(store,item){
+
+ return new Promise((resolve,reject)=>{
+
+  const tx=db.transaction(store,"readwrite");
+
+  tx.objectStore(store).put(item);
+
+  tx.oncomplete=resolve;
+
+  tx.onerror=()=>reject(tx.error);
+
+ });
+
 }
 
-function put(store,item){
- return new Promise((resolve,reject)=>{
-  const tx=db.transaction(store,"readwrite");
-  tx.objectStore(store).put(item);
-  tx.oncomplete=resolve;
-  tx.onerror=()=>reject(tx.error);
- });
-}
 
 function remove(store,id){
+
  return new Promise((resolve,reject)=>{
+
   const tx=db.transaction(store,"readwrite");
+
   tx.objectStore(store).delete(id);
+
   tx.oncomplete=resolve;
+
   tx.onerror=()=>reject(tx.error);
+
  });
+
 }
+
 
 function uid(){
+
  return crypto.randomUUID?
- crypto.randomUUID():Date.now().toString()+Math.random();
+ crypto.randomUUID():
+ Date.now().toString()+Math.random();
+
 }
 
-function log(action,p,delta){
+
+async function log(action,p,delta){
+
  return put("history",{
+
   id:uid(),
+
   date:new Date().toISOString(),
+
   action,
+
   code:p.code,
+
   description:p.description,
+
   delta,
+
   quantity:p.quantity
+
  });
+
 }
+
+
+// AGGIORNAMENTO
 
 async function refresh(){
+
  products=await getAll("products");
+
  history=await getAll("history");
+
  render();
+
 }
 
+
 function show(id,button){
+
  document.querySelectorAll("main section")
  .forEach(s=>s.classList.add("hidden"));
 
@@ -434,76 +535,149 @@ function show(id,button){
  .forEach(b=>b.classList.remove("active"));
 
  if(button)button.classList.add("active");
+
  render();
+
 }
+
 
 function esc(v){
+
  return String(v??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",
- '"':"&quot;","'":"&#39;"
+
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#39;"
+
  })[c]);
+
 }
 
+
 function variantKey(p){
- return [
-  p.code,p.color,p.size,p.model
- ].map(v=>String(v||"").trim().toLowerCase()).join("|");
+
+ return String(p.code||"")
+ .trim()
+ .toLowerCase();
+
 }
+
+
+// VISUALIZZAZIONE
 
 function render(){
 
- document.getElementById("total").textContent=
- products.reduce((s,p)=>s+Number(p.quantity),0);
+ const total=products.reduce(
+  (s,p)=>s+Number(p.quantity||0),0
+ );
 
- document.getElementById("variants").textContent=products.length;
+ document.getElementById("total").textContent=total;
+
+ document.getElementById("variants").textContent=
+ products.length;
 
  document.getElementById("codes").textContent=
- new Set(products.map(p=>p.code)).size;
-const imponibile = products.reduce(
- (sum,p) => sum +
- (Number(p.cost)||0) *
- (Number(p.quantity)||0),
- 0
-);
+ new Set(products.map(p=>variantKey(p))).size;
 
-document.getElementById("imponibile").textContent =
-new Intl.NumberFormat("it-IT",{
- style:"currency",
- currency:"EUR"
-}).format(imponibile);
+
+ const imponibile=products.reduce(
+  (sum,p)=>sum+
+  (Number(p.cost)||0)*
+  (Number(p.quantity)||0),
+  0
+ );
+
+ document.getElementById("imponibile").textContent=
+ new Intl.NumberFormat("it-IT",{
+  style:"currency",
+  currency:"EUR"
+ }).format(imponibile);
+
+
  const recent=[...history]
- .sort((a,b)=>b.date.localeCompare(a.date))
+ .sort((a,b)=>(b.date||"").localeCompare(a.date||""))
  .slice(0,5);
 
+
  document.getElementById("recent").innerHTML=
- recent.length?recent.map(h=>`
+
+ recent.length?
+
+ recent.map(h=>`
+
  <div class="item">
+
  <strong>${esc(h.action)}</strong>
- <small>${esc(h.code)} · ${esc(h.description)}</small>
- ${new Date(h.date).toLocaleString("it-IT")}
- </div>`).join(""):"Nessuna operazione.";
+
+ <small>
+ ${esc(h.code)} · ${esc(h.description)}
+ </small>
+
+ ${h.date?new Date(h.date).toLocaleString("it-IT"):""}
+
+ </div>
+
+ `).join("")
+
+ :"Nessuna operazione.";
+
 
  const q=(document.getElementById("search")?.value||"")
  .toLowerCase();
 
+
  const filtered=products.filter(p=>
- Object.values(p).join(" ").toLowerCase().includes(q)
+
+ [
+  p.code,
+  p.description,
+  p.brand
+ ].join(" ").toLowerCase().includes(q)
+
  );
 
+
  document.getElementById("items").innerHTML=
- filtered.length?filtered.map(p=>`
+
+ filtered.length?
+
+ filtered.map(p=>`
+
  <div class="item">
+
  <strong>${esc(p.description)}</strong>
+
  <small>
- Codice: ${esc(p.code)} |
- ${esc(p.brand)} |
- ${esc(p.color)} |
- Taglia ${esc(p.size)}
- <br>Posizione: ${esc(p.location||"-")}
+
+ Codice: ${esc(p.code)}
+ <br>
+ Marca: ${esc(p.brand||"-")}
+ <br>
+ Costo unitario:
+ ${Number(p.cost||0).toLocaleString("it-IT",{
+  style:"currency",
+  currency:"EUR"
+ })}
+
  </small>
- <div class="quantity">${p.quantity} pezzi</div>
+
+ <div class="quantity">
+ ${Number(p.quantity||0)} pezzi
+ </div>
+
+ <small>
+ Valore articolo:
+ ${(Number(p.cost||0)*Number(p.quantity||0))
+ .toLocaleString("it-IT",{
+  style:"currency",
+  currency:"EUR"
+ })}
+ </small>
 
  <div class="actions no-print">
+
  <button class="secondary"
  onclick="adjust('${p.id}',1)">+1</button>
 
@@ -515,18 +689,48 @@ new Intl.NumberFormat("it-IT",{
 
  <button class="danger"
  onclick="deleteItem('${p.id}')">Elimina</button>
+
  </div>
- </div>`).join(""):"Nessun articolo trovato.";
+
+ </div>
+
+ `).join("")
+
+ :"Nessun articolo trovato.";
+
 
  document.getElementById("history").innerHTML=
- [...history].sort((a,b)=>b.date.localeCompare(a.date))
- .slice(0,100).map(h=>`
+
+ [...history]
+
+ .sort((a,b)=>(b.date||"").localeCompare(a.date||""))
+
+ .slice(0,100)
+
+ .map(h=>`
+
  <div class="item">
+
  <strong>${esc(h.action)} · ${esc(h.code)}</strong>
  <small>${esc(h.description)}</small>
- ${new Date(h.date).toLocaleString("it-IT")}
- </div>`).join("");
+
+ ${h.date?new Date(h.date).toLocaleString("it-IT"):""}
+
+ </div>
+
+ `).join("");
+
 }
+
+
+// INSERIMENTO
+
+function val(id){
+
+ return document.getElementById(id).value.trim();
+
+}
+
 
 document.getElementById("productForm")
 .addEventListener("submit",async e=>{
@@ -534,182 +738,534 @@ document.getElementById("productForm")
  e.preventDefault();
 
  const p={
+
   code:val("code"),
+
   description:val("description"),
+
   brand:val("brand"),
-  model:val("model"),
-  color:val("color"),
-  size:val("size"),
-  cost:val("cost")==="" ? null : Number(val("cost")),
+
+  cost:val("cost")===""?null:Number(val("cost")),
+
   quantity:Number(val("quantity"))
+
  };
 
- if(!p.code||!p.description||
- !Number.isInteger(p.quantity)||p.quantity<0){
+
+ if(
+  !p.code||
+  !p.description||
+  !Number.isInteger(p.quantity)||
+  p.quantity<0||
+  (p.cost!==null&&(!Number.isFinite(p.cost)||p.cost<0))
+ ){
+
   alert("Controlla i dati inseriti.");
+
   return;
+
  }
 
- if(editing){
 
-  const old=products.find(x=>x.id===editing);
+ try{
 
-  const duplicate=products.find(x=>
-   x.id!==editing&&variantKey(x)===variantKey(p)
-  );
+  if(editing){
 
-  if(duplicate){
-   alert("Esiste già questa variante. Modifica l'articolo esistente.");
-   return;
-  }
+   const old=products.find(x=>x.id===editing);
 
-  Object.assign(old,p);
-  await put("products",old);
+   if(!old){
 
-  await log("Modifica",old,old.quantity-p.quantity);
-  editing=null;
+    alert("Articolo non trovato.");
 
- }else{
- const existing=products.find(x=>variantKey(x)===variantKey(p));
+    editing=null;
 
-  if(existing){
-   existing.quantity+=p.quantity;
-   await put("products",existing);
-   await log("Aggiunta quantità",existing,p.quantity);
+    return;
+
+   }
+
+   const duplicate=products.find(x=>
+    x.id!==editing&&
+    variantKey(x)===variantKey(p)
+   );
+
+   if(duplicate){
+
+    alert("Esiste già un articolo con questo codice.");
+
+    return;
+
+   }
+
+   const oldQuantity=Number(old.quantity||0);
+
+   Object.assign(old,p);
+
+   await put("products",old);
+
+   await log("Modifica",old,p.quantity-oldQuantity);
+
+   editing=null;
+
   }else{
-   p.id=uid();
-   p.createdAt=new Date().toISOString();
-   await put("products",p);
-   await log("Nuovo articolo",p,p.quantity);
-  }
- }
 
- resetForm();
- await refresh();
- show("archive",document.querySelectorAll("nav button")[2]);
+   const existing=products.find(x=>
+    variantKey(x)===variantKey(p)
+   );
+
+   if(existing){
+
+    existing.quantity=
+    Number(existing.quantity||0)+p.quantity;
+
+    if(p.cost!==null){
+     existing.cost=p.cost;
+    }
+
+    if(p.brand){
+     existing.brand=p.brand;
+    }
+
+    await put("products",existing);
+
+    await log("Aggiunta quantità",existing,p.quantity);
+
+   }else{
+
+    p.id=uid();
+
+    p.createdAt=new Date().toISOString();
+
+    await put("products",p);
+
+    await log("Nuovo articolo",p,p.quantity);
+
+   }
+
+  }
+
+  resetForm();
+
+  await refresh();
+
+  show("archive",document.querySelectorAll("nav button")[2]);
+
+ }catch(error){
+
+  alert("Errore nel salvataggio: "+error.message);
+
+ }
 
 });
 
-function val(id){
- return document.getElementById(id).value.trim();
-}
 
 function resetForm(){
+
  document.getElementById("productForm").reset();
+
  editing=null;
+
+ document.getElementById("voiceStatus").textContent=
+ "Premi il microfono e descrivi il prodotto.";
+
 }
+
+
+// RETTIFICHE
 
 async function adjust(id,n){
+
  const p=products.find(x=>x.id===id);
+
  if(!p)return;
 
- if(p.quantity+n<0)return alert("Quantità non valida.");
+ if(Number(p.quantity)+n<0){
 
- p.quantity+=n;
+  alert("Quantità non valida.");
+
+  return;
+
+ }
+
+ p.quantity=Number(p.quantity)+n;
+
  await put("products",p);
+
  await log("Rettifica quantità",p,n);
+
  await refresh();
+
 }
 
+
+// MODIFICA
+
 function editItem(id){
+
  const p=products.find(x=>x.id===id);
+
  if(!p)return;
 
  editing=id;
 
- ["code","description","brand","model",
- "color","size","location","quantity"]
- .forEach(k=>document.getElementById(k).value=p[k]??"");
+ ["code","description","brand","quantity","cost"]
+ .forEach(k=>{
+
+  document.getElementById(k).value=p[k]??"";
+
+ });
 
  show("form",document.querySelectorAll("nav button")[1]);
+
 }
 
+
+// ELIMINAZIONE
+
 async function deleteItem(id){
+
  if(!confirm("Vuoi eliminare questo articolo?"))return;
 
  const p=products.find(x=>x.id===id);
+
  if(!p)return;
 
- await log("Eliminazione",p,-p.quantity);
+ await log("Eliminazione",p,-Number(p.quantity||0));
+
  await remove("products",id);
+
  await refresh();
+
 }
 
+
+// ESPORTAZIONE CSV
+
 function exportCSV(){
+
  const rows=[
- ["Codice","Descrizione","Marca","Modello",
- "Colore","Taglia","Posizione","Quantità"],
+
+ [
+  "Codice articolo",
+  "Descrizione",
+  "Marca",
+  "Quantità",
+  "Costo unitario",
+  "Valore totale"
+ ],
+
  ...products.map(p=>[
- p.code,p.description,p.brand,p.model,
- p.color,p.size,p.location,p.quantity
+
+  p.code,
+  p.description,
+  p.brand,
+  p.quantity,
+  p.cost??"",
+  (Number(p.cost)||0)*(Number(p.quantity)||0)
+
  ])
+
  ];
 
  const csv="\uFEFF"+rows.map(r=>
- r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"')
- .join(";")
+
+  r.map(v=>
+   '"'+String(v??"").replace(/"/g,'""')+'"'
+  ).join(";")
+
  ).join("\r\n");
 
- download(csv,"inventario_magazzino.csv","text/csv;charset=utf-8");
+
+ download(
+  csv,
+  "inventario_magazzino.csv",
+  "text/csv;charset=utf-8"
+ );
+
 }
+
+
+// DOWNLOAD
 
 function download(data,name,type){
- const url=URL.createObjectURL(new Blob([data],{type}));
+
+ const url=URL.createObjectURL(
+  new Blob([data],{type})
+ );
+
  const a=document.createElement("a");
+
  a.href=url;
+
  a.download=name;
+
+ document.body.appendChild(a);
+
  a.click();
+
+ a.remove();
+
  setTimeout(()=>URL.revokeObjectURL(url),1000);
+
 }
+
+
+// BACKUP
 
 async function backup(){
+
  const data={
+
   version:1,
+
   products,
+
   history,
+
   date:new Date().toISOString()
+
  };
 
- download(JSON.stringify(data,null,2),
- "backup_magazzino.json","application/json");
+ download(
+  JSON.stringify(data,null,2),
+  "backup_magazzino.json",
+  "application/json"
+ );
+
 }
 
+
+// RIPRISTINO
+
 async function restore(event){
+
  const file=event.target.files[0];
+
  if(!file)return;
 
- if(!confirm("Il ripristino sostituirà i dati presenti. Continuare?"))
- return;
+ if(!confirm("Il ripristino sostituirà i dati presenti. Continuare?")){
+
+  event.target.value="";
+
+  return;
+
+ }
 
  try{
+
   const data=JSON.parse(await file.text());
 
-  if(!Array.isArray(data.products)||
-     !Array.isArray(data.history)){
+  if(
+   !Array.isArray(data.products)||
+   !Array.isArray(data.history)
+  ){
+
    throw new Error("Backup non valido");
+
   }
 
-  const tx=db.transaction(["products","history"],"readwrite");
+  const tx=db.transaction(
+   ["products","history"],
+   "readwrite"
+  );
 
   tx.objectStore("products").clear();
+
   tx.objectStore("history").clear();
 
-  data.products.forEach(p=>tx.objectStore("products").put(p));
-  data.history.forEach(h=>tx.objectStore("history").put(h));
+  data.products.forEach(p=>
+   tx.objectStore("products").put(p)
+  );
+
+  data.history.forEach(h=>
+   tx.objectStore("history").put(h)
+  );
 
   tx.oncomplete=async()=>{
+
    await refresh();
+
    alert("Backup ripristinato correttamente.");
+
   };
 
-  tx.onerror=()=>alert("Errore nel ripristino.");
+  tx.onerror=()=>{
 
- }catch(e){
+   alert("Errore nel ripristino.");
+
+  };
+
+ }catch(error){
+
   alert("File di backup non valido.");
+
  }
 
  event.target.value="";
+
 }
+
+
+// NUMERI VOCALI ITALIANI
+
+function italianNumberWords(){
+
+ const words={
+
+  zero:0,uno:1,una:1,un:1,
+  due:2,tre:3,quattro:4,cinque:5,
+  sei:6,sette:7,otto:8,nove:9,
+
+  dieci:10,undici:11,dodici:12,
+  tredici:13,quattordici:14,
+  quindici:15,sedici:16,
+  diciassette:17,diciotto:18,diciannove:19,
+
+  venti:20,trenta:30,quaranta:40,
+  cinquanta:50,sessanta:60,
+  settanta:70,ottanta:80,novanta:90,
+
+  cento:100,mille:1000
+
+ };
+
+ const units=[
+  "uno","due","tre","quattro","cinque",
+  "sei","sette","otto","nove"
+ ];
+
+ const tens=[
+  "venti","trenta","quaranta","cinquanta",
+  "sessanta","settanta","ottanta","novanta"
+ ];
+
+ tens.forEach((t,i)=>{
+
+  const stem=t.slice(0,-1);
+
+  units.forEach((u,j)=>{
+
+   let word=(j===0||j===7)?stem+u:t+u;
+
+   words[word]=(i+2)*10+j+1;
+
+  });
+
+ });
+
+ return words;
+
+}
+
+
+const NUMBER_WORDS=italianNumberWords();
+
+
+function italianNumber(text){
+
+ const cleaned=text.toLowerCase()
+ .replace(/[.,;:!?]/g," ")
+ .trim();
+
+ if(!cleaned)return null;
+
+ const direct=cleaned.match(/^\d+$/);
+
+ if(direct)return Number(direct[0]);
+
+ let total=0;
+
+ let current=0;
+
+ const tokens=cleaned.split(/\s+/);
+
+ for(const token of tokens){
+
+  if(NUMBER_WORDS[token]!==undefined){
+
+   const n=NUMBER_WORDS[token];
+
+   if(n===1000){
+
+    total+=(current||1)*1000;
+
+    current=0;
+
+   }else if(n===100){
+
+    current=(current||1)*100;
+
+   }else{
+
+    current+=n;
+
+   }
+
+  }
+
+ }
+
+ return total+current||null;
+
+}
+
+
+// PREZZO VOCALE
+
+function parseCost(text){
+
+ let s=text.toLowerCase()
+ .replace(/euro|eur|€|centesimi|centesimo/g," ")
+ .trim();
+
+ if(!s)return null;
+
+ // Esempio: 35 euro e 50
+
+ let match=s.match(
+  /^(\d+)\s+e\s+(\d{1,2})$/
+ );
+
+ if(match){
+
+  return Number(match[1])+
+  Number(("0."+match[2]));
+
+ }
+
+ // Esempio: 35,50 oppure 35.50
+
+ match=s.match(/^(\d+)[,.](\d{1,2})$/);
+
+ if(match){
+
+  return Number(match[1]+"."+match[2]);
+
+ }
+
+ // Esempio: trentacinque e cinquanta
+
+ const parts=s.split(/\s+(?:e|virgola)\s+/);
+
+ if(parts.length===2){
+
+  const euro=italianNumber(parts[0]);
+
+  const cents=italianNumber(parts[1]);
+
+  if(euro!==null&&cents!==null&&cents<100){
+
+   return euro+cents/100;
+
+  }
+
+ }
+
+ return italianNumber(s);
+
+}
+
+
+// RICONOSCIMENTO VOCALE
 
 function voiceInput(){
 
@@ -717,123 +1273,206 @@ function voiceInput(){
  window.webkitSpeechRecognition;
 
  if(!Speech){
-  alert("Riconoscimento vocale non disponibile. Usa Chrome.");
+
+  alert("Riconoscimento vocale non disponibile. Utilizza Google Chrome.");
+
   return;
+
  }
 
- const rec=new Speech();
- rec.lang="it-IT";
- rec.interimResults=false;
+ if(recognition){
 
- document.getElementById("voiceStatus").textContent=
- "Ti sto ascoltando...";
+  try{recognition.stop();}catch(e){}
 
- rec.onresult=e=>{
+ }
+
+ recognition=new Speech();
+
+ recognition.lang="it-IT";
+
+ recognition.interimResults=false;
+
+ recognition.continuous=false;
+
+ recognition.maxAlternatives=1;
+
+ const status=document.getElementById("voiceStatus");
+
+ recognition.onstart=()=>{
+
+  status.textContent="🎤 Ti sto ascoltando...";
+
+ };
+
+ recognition.onresult=e=>{
+
   const text=e.results[0][0].transcript;
+
   parseVoice(text);
-  document.getElementById("voiceStatus").textContent=
-  "Riconosciuto: "+text;
+
+  status.textContent="Riconosciuto: "+text;
+
  };
 
- rec.onerror=e=>{
-  document.getElementById("voiceStatus").textContent=
-  "Errore vocale: "+e.error;
+ recognition.onerror=e=>{
+
+  status.textContent="Errore vocale: "+e.error;
+
  };
 
- rec.start();
+ recognition.onend=()=>{
+
+  if(status.textContent==="🎤 Ti sto ascoltando..."){
+
+   status.textContent="Ascolto terminato.";
+
+  }
+
+ };
+
+ try{
+
+  recognition.start();
+
+ }catch(error){
+
+  status.textContent="Impossibile avviare il microfono. Riprova.";
+
+ }
+
 }
+
+
+// INTERPRETAZIONE DELLA FRASE
+
 function parseVoice(text){
 
- const regex = /(^|[\s,;:])(codice\s+articolo|codice|descrizione|marca|quantità|qta|prezzo\s+di\s+costo\s+unitario|costo\s+unitario|prezzo\s+unitario|costo|prezzo)(?=$|[\s,;:.])/giu;
+ const pattern=/(^|[\s,;:.]+)(codice\s+articolo|codice|descrizione|marca|quantità|qta|prezzo\s+di\s+costo\s+unitario|prezzo\s+di\s+costo|costo\s+unitario|prezzo\s+unitario|costo|prezzo)(?=$|[\s,;:.])/giu;
 
- const matches = [...text.matchAll(regex)];
+ const matches=[...text.matchAll(pattern)];
 
- const fields = {};
+ const fields={};
 
  matches.forEach((m,i)=>{
 
-  const label = m[2].toLowerCase().replace(/\s+/g," ");
+  const label=m[2].toLowerCase().replace(/\s+/g," ");
 
-  const start = m.index + m[1].length + m[2].length;
+  const start=m.index+m[1].length+m[2].length;
 
-  const next = matches[i+1];
+  const end=matches[i+1]
+   ?matches[i+1].index
+   :text.length;
 
-  const end = next
-   ? next.index + next[1].length
-   : text.length;
+  const value=text.substring(start,end)
+  .replace(/^[\s,;:.]+|[\s,;:.]+$/g,"")
+  .trim();
 
-  const value = text.substring(start,end)
-   .replace(/^[\s,;:]+|[\s,;:.]+$/g,"")
-   .trim();
+  if(label==="codice articolo"||label==="codice"){
 
-  if(label==="codice articolo" || label==="codice")
    fields.code=value;
 
-  if(label==="descrizione")
+  }else if(label==="descrizione"){
+
    fields.description=value;
 
-  if(label==="marca")
+  }else if(label==="marca"){
+
    fields.brand=value;
 
-  if(label==="quantità" || label==="qta")
+  }else if(label==="quantità"||label==="qta"){
+
    fields.quantity=value;
 
-  if(
-   label==="costo unitario" ||
-   label==="prezzo unitario" ||
-   label==="prezzo di costo unitario" ||
-   label==="costo" ||
+  }else if(
+   label==="prezzo di costo unitario"||
+   label==="prezzo di costo"||
+   label==="costo unitario"||
+   label==="prezzo unitario"||
+   label==="costo"||
    label==="prezzo"
   ){
+
    fields.cost=value;
+
   }
 
  });
 
- if(fields.code)
-  document.getElementById("code").value=fields.code;
 
- if(fields.description)
-  document.getElementById("description").value=fields.description;
+ if(fields.code){
 
- if(fields.brand)
-  document.getElementById("brand").value=fields.brand;
+  document.getElementById("code").value=
+  fields.code.replace(/[.,;:]+$/,"").trim();
+
+ }
+
+ if(fields.description){
+
+  document.getElementById("description").value=
+  fields.description;
+
+ }
+
+ if(fields.brand){
+
+  document.getElementById("brand").value=
+  fields.brand;
+
+ }
 
  if(fields.quantity){
-  const q=fields.quantity.match(/\d+/);
-  if(q) document.getElementById("quantity").value=q[0];
+
+  const q=italianNumber(fields.quantity);
+
+  if(q!==null){
+
+   document.getElementById("quantity").value=q;
+
+  }
+
  }
 
  if(fields.cost){
 
-  const cost=fields.cost
-   .replace(/euro|eur|€/gi,"")
-   .replace(/\s/g,"")
-   .replace(/\.(?=\d{3}(?:,|$))/g,"")
-   .replace(",",".")
-   .match(/\d+(?:\.\d+)?/);
+  const cost=parseCost(fields.cost);
 
-  if(cost)
-   document.getElementById("cost").value=cost[0];
+  if(cost!==null&&Number.isFinite(cost)&&cost>=0){
+
+   document.getElementById("cost").value=
+   cost.toFixed(2);
+
+  }
+
  }
 
+}
 
+
+// AVVIO
 
 async function start(){
 
  await openDB();
+
  await refresh();
 
  if("serviceWorker" in navigator){
+
   navigator.serviceWorker.register("./sw.js")
   .catch(console.error);
+
  }
+
 }
 
 start().catch(e=>{
+
  alert("Errore apertura archivio: "+e.message);
+
 });
 
 </script>
+
 </body>
 </html>
+```
