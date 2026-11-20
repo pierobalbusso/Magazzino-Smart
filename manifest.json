@@ -1,10 +1,9 @@
 
-
-```json
+json
 {
   "name": "MAGAZZINO SMART",
-  "short_name":json
-"description": "Applicazione per la gestione intelligente del magazzino, con inserimento vocale, archivio e calcolo dei costi.",
+  "short_name": "Magazzino",
+  "description": "Gestione intelligente del magazzino con inserimento vocale, archivio articoli, quantità e calcolo dei costi.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -18,4 +17,3 @@
     }
   ]
 }
-``
