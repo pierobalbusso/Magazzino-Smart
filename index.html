@@ -544,7 +544,7 @@ document.getElementById("productForm")
   quantity:Number(val("quantity"))
  };
 
- if(!p.code||!p.description||!p.color||!p.size||
+ if(!p.code||!p.description||
  !Number.isInteger(p.quantity)||p.quantity<0){
   alert("Controlla i dati inseriti.");
   return;
