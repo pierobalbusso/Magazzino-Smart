@@ -3,7 +3,8 @@
 ```json
 {
   "name": "MAGAZZINO SMART",
-  "short_name": "Magazzino",
+  "short_name": "Magazzino",`json
+"description": "Applicazione per la gestione intelligente del magazzino, con inserimento vocale, archivio e calcolo dei costi.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
