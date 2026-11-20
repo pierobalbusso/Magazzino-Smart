@@ -431,7 +431,18 @@ function render(){
 
  document.getElementById("codes").textContent=
  new Set(products.map(p=>p.code)).size;
+const imponibile = products.reduce(
+ (sum,p) => sum +
+ (Number(p.cost)||0) *
+ (Number(p.quantity)||0),
+ 0
+);
 
+document.getElementById("imponibile").textContent =
+new Intl.NumberFormat("it-IT",{
+ style:"currency",
+ currency:"EUR"
+}).format(imponibile);
  const recent=[...history]
  .sort((a,b)=>b.date.localeCompare(a.date))
  .slice(0,5);
