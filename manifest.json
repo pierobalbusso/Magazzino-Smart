@@ -1,8 +1,9 @@
 
+
 {
   "name": "MAGAZZINO SMART",
   "short_name": "Magazzino",
-  "description": "Gestione intelligente del magazzino con inserimento vocale, archivio articoli, quantità e calcolo dei costi.",
+  "description": "Gestione intelligente del magazzino",
   "id": "./",
   "start_url": "./",
   "scope": "./",
@@ -22,12 +23,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
     }
   ]
-}	
-
+}
