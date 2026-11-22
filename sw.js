@@ -1,6 +1,6 @@
 
 
-const CACHE = "magazzino-smart-v31";
+const CACHE = "magazzino-smart-v32";
 
 const FILES = [
   "./",
