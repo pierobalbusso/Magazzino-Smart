@@ -1,13 +1,14 @@
 
 
-
-const CACHE = "magazzino-smart-v30";
+const CACHE = "magazzino-smart-v31";
 
 const FILES = [
   "./",
   "./index.html",
   "./manifest.json",
-  "./icon.svg"
+  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png"
 ].map(path => new URL(path, self.registration.scope).href);
 
 self.addEventListener("install", event => {
